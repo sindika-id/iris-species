@@ -1,42 +1,31 @@
+# Iris Species Classification
 
+A **minimal, clean, and reproducible traditional machine learning project** using the Iris dataset.
 
-
-# Iris Species – Traditional Machine Learning Project 
-
-## 📌 Deskripsi Proyek
-Proyek ini merupakan implementasi **end-to-end Data Science menggunakan Traditional Machine Learning** dengan dataset **Iris Species**.
-
-Tujuan utama proyek:
-- Menyediakan **template clean & modular** untuk proyek ML klasik
-- Memisahkan dengan jelas **data, pipeline, model, experiment, dan report**
-- Menjadi fondasi yang mudah dikembangkan ke skala production
-
-Model baseline yang digunakan adalah **Logistic Regression**.
+This repository is designed as a **reference implementation and starter template** for classical ML workflows, following widely accepted practices from projects such as scikit-learn examples and Google ML templates.
 
 ---
 
-## 🧱 Arsitektur Proyek
+## Overview
 
-Proyek ini mengikuti prinsip **Clean Architecture for Data Science**:
+The project demonstrates a complete ML workflow:
 
-- `src/` → Core engine (data, model, pipeline)
-- `scripts/` → CLI entrypoint (PowerShell)
-- `experiments/` → Konfigurasi & catatan eksperimen
-- `models_artifacts/` → Model & checkpoint
-- `reports/` → Hasil evaluasi
-- `data/` → Dataset (raw & processed)
+- Structured data organization
+- Deterministic preprocessing
+- Baseline model training
+- Evaluation and artifact persistence
 
-Tidak ada dependency silang yang melanggar layer.
+The focus is on **clarity, simplicity, and extensibility**, rather than framework complexity.
 
 ---
 
-## 📂 Struktur Folder
+## Project Structure
 
 ```
-
 project/
 ├── data/
-│   ├── raw/iris.csv
+│   ├── raw/
+│   │   └── iris.csv
 │   └── processed/
 │
 ├── src/
@@ -50,75 +39,121 @@ project/
 ├── models_artifacts/
 ├── reports/
 ├── scripts/
-├── LICENSE
 ├── requirements.txt
 └── README.md
+```
 
-````
+Each directory has a single responsibility and avoids cross-layer coupling.
 
 ---
 
-## 📊 Dataset
+## Dataset
 
-- **Nama**: Iris Species Dataset
-- **Format**: CSV
-- **Lokasi**: `data/raw/iris.csv`
+- **Name**: Iris Species Dataset  
+- **Format**: CSV  
+- **Location**: `data/raw/iris.csv`  
 - **Target**: `species`
-- **Fitur**:
-  - sepal_length
-  - sepal_width
-  - petal_length
-  - petal_width
 
-Dataset **tidak boleh diubah** dan selalu dibaca dari folder `raw/`.
+### Feature Columns
+
+- `sepal_length`
+- `sepal_width`
+- `petal_length`
+- `petal_width`
+
+**Data handling rules**:
+- Raw data is treated as **read-only**
+- All transformations are written to `data/processed/`
 
 ---
 
-## ⚙️ Setup Environment
+## Model
 
-### 1️⃣ Buat Virtual Environment (opsional)
+- **Algorithm**: Logistic Regression  
+- **Task**: Multiclass Classification  
+- **Library**: scikit-learn
+
+Logistic Regression is used as a **baseline** due to its interpretability, stability, and suitability for small structured datasets.
+
+---
+
+## Environment Setup
+
+### (Optional) Create Virtual Environment
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\activate
-````
+```
 
-### 2️⃣ Install Dependency
+### Install Dependencies
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-Dependency utama:
+### Core Dependencies
 
-* pandas
-* numpy
-* scikit-learn
-* joblib
-* pyyaml
+- pandas
+- numpy
+- scikit-learn
+- joblib
+- pyyaml
 
 ---
 
-## ▶️ Cara Menjalankan Pipeline
+## Usage
 
-### Training + Evaluation
+### Train and Evaluate
 
 ```powershell
 .\scripts\train.ps1
 ```
 
-Pipeline ini akan:
+This command executes the full pipeline:
 
-1. Load data dari `data/raw/iris.csv`
-2. Split data (train/val/test) secara stratified
-3. Simpan hasil split ke `data/processed/`
-4. Train Logistic Regression
-5. Simpan model ke `models_artifacts/final/model.joblib`
-6. Simpan metrik ke `reports/results.md`
+1. Load data from `data/raw/iris.csv`
+2. Perform stratified train/validation/test split
+3. Persist processed data to `data/processed/`
+4. Train the model
+5. Save the trained model to `models_artifacts/final/model.joblib`
+6. Write evaluation metrics to `reports/results.md`
 
 ---
 
-### Evaluasi Saja
+### Evaluate Only
 
 ```powershell
 .\scripts\evaluate.ps1
 ```
+
+Runs evaluation using an existing trained model without retraining.
+
+---
+
+## Reproducibility
+
+This project emphasizes reproducibility through:
+
+- Fixed random seeds
+- Deterministic preprocessing steps
+- Explicit dependency specification
+- Serialized model artifacts
+
+---
+
+## Extensibility
+
+The structure is intentionally simple but supports extension to:
+
+- Additional classical ML algorithms
+- Hyperparameter tuning
+- Experiment tracking
+- Batch or API-based inference
+- CI/CD-enabled ML workflows
+
+---
+
+## License
+
+This project is licensed under the terms specified in the `LICENSE` file.
