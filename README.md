@@ -104,11 +104,52 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Train and Evaluate
+---
+## Running Model Experiments
+
+Model experiments are executed using the PowerShell script `train.ps1`, with each model defined by its own configuration file.
+
+### Logistic Regression
 
 ```powershell
-.\scripts\train.ps1
+.\scripts\train.ps1 experiments\exp_001_logreg\config.yaml
 ```
+
+### K-Nearest Neighbors (KNN)
+
+```powershell
+.\scripts\train.ps1 experiments\exp_002_knn\config.yaml
+```
+
+### Support Vector Machine (SVM)
+
+```powershell
+.\scripts\train.ps1 experiments\exp_003_svm\config.yaml
+```
+
+
+## Evaluation Only
+
+To run evaluation without training, use the PowerShell script `evaluate.ps1`. Evaluation always uses the model defined in the corresponding experiment configuration.
+
+### Logistic Regression
+
+```powershell
+.\\scripts\\evaluate.ps1 experiments\\exp_001_logreg\\config.yaml
+```
+
+### K-Nearest Neighbors (KNN)
+
+```powershell
+.\\scripts\\evaluate.ps1 experiments\\exp_002_knn\\config.yaml
+```
+
+### Support Vector Machine (SVM)
+
+```powershell
+.\\scripts\\evaluate.ps1 experiments\\exp_003_svm\\config.y
+```
+---
 
 This command executes the full pipeline:
 
@@ -118,18 +159,6 @@ This command executes the full pipeline:
 4. Train the model
 5. Save the trained model to `models_artifacts/final/model.joblib`
 6. Write evaluation metrics to `reports/results.md`
-
----
-
-### Evaluate Only
-
-```powershell
-.\scripts\evaluate.ps1
-```
-
-Runs evaluation using an existing trained model without retraining.
-
----
 
 ## Reproducibility
 
